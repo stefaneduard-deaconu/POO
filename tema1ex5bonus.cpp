@@ -60,17 +60,24 @@ void sort (event* v){
         }
     }
 }
-void Greedy(event* v){
-    funct_read(v);
-    sort(v);
 
-}
 int main (){
     cin>>n;
+    int m = 0;
     event ev[n];
-    Greedy(ev);
+    funct_read(ev);
+    sort(ev);
+    event afisare[n];
+    afisare[0] = ev[0];
+    m++;
+    for (int i=1; i<n; i++){
+        if (compare_date(ev[i].start, afisare[m-1].end) == true){
+            afisare[m] = ev[i];
+            m++;
+        }
+    }
     for (int i = 0; i < n; i++){
-        funct_write(ev[i]);
+        funct_write(afisare[i]);
     }
     return 0;
 }
