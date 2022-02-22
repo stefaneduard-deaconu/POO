@@ -1,3 +1,4 @@
+/*
 #include<iostream>
 #include<cstring>
 using namespace std;
@@ -55,3 +56,75 @@ int main (){
     statisticaZboruri(3, bilete);
 
 }
+*/
+
+#include<iostream>
+#include <cstring>
+using namespace std;
+
+class Film {
+    string titlu;
+    long nr_like;
+
+public:
+    void citire() {
+        getline(cin, titlu);
+        cin.get();
+        cin>>nr_like;
+    }
+    Film() {
+        //generator
+        titlu = " ";
+        nr_like = 0;
+    }
+    Film(string word, long number) {
+        titlu = word;
+        nr_like = number;
+    }
+    string getTitle() {
+        return titlu;
+    }
+    long getLikeNr() {
+        return nr_like;
+    }
+    string setTitle(string word) {
+        Film::titlu = word;
+    }
+    long setLikeNr(long number) {
+        Film::nr_like = number;
+    }
+};
+
+void afisarePopulare (int n, Film filme[], int k) {
+    int a[n];
+    for (int i=0; i<n; i++) {
+        a[i] = filme[i].getLikeNr();
+    }
+    for (int i=0; i<n; i++) {
+        for (int j=i+1; j<n; j++) {
+            if (a[i] < a[j]) {
+                swap(a[i],a[j]);
+            }
+        }
+    }
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<n; j++) {
+            if (a[i] == filme[j].getLikeNr() && k!=0) {
+                cout<<filme[j].getTitle()<<" ";
+                k--;
+            }
+        }
+    }
+}
+
+int main () {
+    Film filme[] = {
+            Film("A", 1736),
+            Film("B", 871313),
+            Film("C", 319236),
+            Film("D", 52413),
+            Film("E",16328)
+    };
+    afisarePopulare(5 ,filme, 3);
+}
+
