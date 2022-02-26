@@ -57,7 +57,7 @@ int main (){
 
 }
 */
-
+/*
 #include<iostream>
 #include <cstring>
 using namespace std;
@@ -127,4 +127,229 @@ int main () {
     };
     afisarePopulare(5 ,filme, 3);
 }
+*/
+/*
+#include<iostream>
+#include<cstring>
+using namespace std;
+class Tablou {
+    string mesaj;
+    int inaltime, latime, pret;
+public:
+    void citeste () {
+        cout<<"Mesaj Motivational";
+        getline(cin,mesaj);
+        cin.get();
+        cin>>inaltime>>latime>>pret;
+    }
+    Tablou() {
+        mesaj = " ";
+        inaltime = 0;
+        latime = 0;
+        pret = 0;
+    }
+    Tablou(string word, int num1, int num2, int num3){
+        mesaj = word;
+        inaltime = num1;
+        latime = num2;
+        pret = num3;
+    }
+    string getMessage () {
+        return mesaj;
+    }
+    string setMessage (string word) {
+        Tablou::mesaj = word;
+    }
 
+};
+
+int main () {
+    Tablou tablouri[] = {
+            Tablou("Buna dimineata", 12, 32, 30),
+            Tablou("S-a trezit dulceata", 533, 132, 887),
+            Tablou("Bla bla bla bla bla", 423, 31, 438),
+            Tablou("wjnfkjedwjfkefqwejfbnjenbfejewfef", 232, 211, 54)
+    };
+    char * sep;
+    int n = 4;
+    int Size = 0;
+    int Max = 0;
+    string mesajMax;
+    for (int i = 0; i < n; i++) {
+        Size = tablouri[i].getMessage().length();
+        char ch[Size+1];
+        int C = 0;
+        strcpy(ch, tablouri[i].getMessage().c_str());
+        for (int j = 0; j < Size; j++) {
+            if (ch[j] == ' '){
+                C++;
+            }
+        }
+        if (Max < C) {
+            Max = C;
+            mesajMax = tablouri[i].getMessage();
+        }
+    }
+    cout<<"Tabloul cu mesajul: "<<mesajMax<<" \nAre numarul maxim de "<<(Max+2)<<" cuvinte.";
+}
+*/
+/*
+#include<iostream>
+using namespace std;
+class Carte {
+    string title;
+    int currentPage;
+    int pageNr;
+
+public:
+    void citeste() {
+        getline(cin, title);
+        cin>>currentPage;
+        cin>>pageNr;
+    }
+    void afiseaza() {
+        cout<<"Cartea cu titlul ";
+        cout<<title;
+        cout<<" sta deschisa la pagina ";
+        cout<<currentPage;
+        cout<<" din ";
+        cout<<pageNr;
+        cout<<"\n";
+    }
+    Carte() {
+        title = " ";
+        currentPage = 0;
+        pageNr = 0;
+    }
+    Carte(string word, int num1, int num2) {
+        title = word;
+        currentPage = num1;
+        pageNr = num2;
+    }
+    string getTitle() {
+        return title;
+    }
+    int getCurrentPage() {
+        return currentPage;
+    }
+    int getPageNr() {
+        return pageNr;
+    }
+    int setCurrentPage(int num) {
+        if (num <= pageNr) {
+            currentPage = num;
+        }
+        else{
+            cout<<"Nu poti sari la pagina ";
+            cout<<num;
+            cout<<" din ";
+            cout<<pageNr;
+            cout<<" deoarece nu exista!\n";
+        }
+    }
+
+};
+
+int main () {
+    Carte c;
+    c.citeste();
+    c.afiseaza();
+    c.setCurrentPage(30);
+    c.afiseaza();
+    c.setCurrentPage(c.getPageNr()+1);
+}
+*/
+
+#include<iostream>
+using namespace std;
+class Client {
+    int ID;
+    int sumaBani;
+public:
+    void readClient() {
+        cin>>ID>>sumaBani;
+    }
+    Client() {
+        ID = 0;
+        sumaBani = 0;
+    }
+    Client(int num1, int num2) {
+        ID = num1;
+        sumaBani = num2;
+    }
+    int getID() {
+        return ID;
+    }
+    int setID(int num) {
+        ID = num;
+    }
+    int getSum() {
+        return sumaBani;
+    }
+    int setSum(int num) {
+        sumaBani = num;
+    }
+};
+class Banca {
+    int nrClienti;
+    Client clienti[];
+public:
+    void Read() {
+        cin>>nrClienti;
+        for (int i = 0; i < nrClienti; i++) {
+            clienti[i].readClient();
+        }
+    }
+    Banca() {
+        nrClienti = 0;
+        clienti[nrClienti] = {};
+    }
+    Banca(int num, Client c[]) {
+        nrClienti = num;
+        for (int i = 0; i < nrClienti; i++) {
+            clienti[i] = c[i];
+        }
+    }
+    int getNrClienti() {
+        return nrClienti;
+    }
+    int setNrClienti(int num) {
+        nrClienti = num;
+    }
+    void sumTotal() {
+        long suma = 0;
+        for (int i = 0; i < nrClienti; i++) {
+            suma = suma + clienti[i].getSum();
+        }
+        cout<<"Suma totala este de "<<suma<<" RON.\n";
+    }
+    void minValue() {
+        long count = 0;
+        for (int i = 0; i < nrClienti; i++) {
+            if(clienti[i].getSum() >= 1000) {
+                count++;
+            }
+        }
+        cout<<count<<" clienti ai bancii au cel putin 1000 RON in cont\n";
+    }
+    void Percentage() {
+        float p;
+        long count = 0;
+        for (int i = 0; i < nrClienti; i++) {
+            if(clienti[i].getSum() > 100) {
+                count++;
+            }
+        }
+        p = count*100/ nrClienti;
+        cout<<p<<"% clienti au peste 100 RON in cont\n";
+    }
+};
+int main() {
+    Banca b;
+    b.Read();
+    b.sumTotal();
+    b.minValue();
+    b.Percentage();
+
+    return 0;
+}
