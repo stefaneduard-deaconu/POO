@@ -139,7 +139,6 @@ public:
     void citeste () {
         cout<<"Mesaj Motivational";
         getline(cin,mesaj);
-        cin.get();
         cin>>inaltime>>latime>>pret;
     }
     Tablou() {
@@ -260,96 +259,249 @@ int main () {
 }
 */
 
-#include<iostream>
-using namespace std;
-class Client {
-    int ID;
-    int sumaBani;
-public:
-    void readClient() {
-        cin>>ID>>sumaBani;
-    }
-    Client() {
-        ID = 0;
-        sumaBani = 0;
-    }
-    Client(int num1, int num2) {
-        ID = num1;
-        sumaBani = num2;
-    }
-    int getID() {
-        return ID;
-    }
-    int setID(int num) {
-        ID = num;
-    }
-    int getSum() {
-        return sumaBani;
-    }
-    int setSum(int num) {
-        sumaBani = num;
-    }
-};
-class Banca {
-    int nrClienti;
-    Client clienti[];
-public:
-    void Read() {
-        cin>>nrClienti;
-        for (int i = 0; i < nrClienti; i++) {
-            clienti[i].readClient();
-        }
-    }
-    Banca() {
-        nrClienti = 0;
-        clienti[nrClienti] = {};
-    }
-    Banca(int num, Client c[]) {
-        nrClienti = num;
-        for (int i = 0; i < nrClienti; i++) {
-            clienti[i] = c[i];
-        }
-    }
-    int getNrClienti() {
-        return nrClienti;
-    }
-    int setNrClienti(int num) {
-        nrClienti = num;
-    }
-    void sumTotal() {
-        long suma = 0;
-        for (int i = 0; i < nrClienti; i++) {
-            suma = suma + clienti[i].getSum();
-        }
-        cout<<"Suma totala este de "<<suma<<" RON.\n";
-    }
-    void minValue() {
-        long count = 0;
-        for (int i = 0; i < nrClienti; i++) {
-            if(clienti[i].getSum() >= 1000) {
-                count++;
-            }
-        }
-        cout<<count<<" clienti ai bancii au cel putin 1000 RON in cont\n";
-    }
-    void Percentage() {
-        float p;
-        long count = 0;
-        for (int i = 0; i < nrClienti; i++) {
-            if(clienti[i].getSum() > 100) {
-                count++;
-            }
-        }
-        p = count*100/ nrClienti;
-        cout<<p<<"% clienti au peste 100 RON in cont\n";
-    }
-};
-int main() {
-    Banca b;
-    b.Read();
-    b.sumTotal();
-    b.minValue();
-    b.Percentage();
+// #include<iostream>
+// using namespace std;
+// class Client {
+//     int ID;
+//     int sumaBani;
+// public:
+//     void readClient() {
+//         cin>>ID>>sumaBani;
+//     }
+//     Client() {
+//         ID = 0;
+//         sumaBani = 0;
+//     }
+//     Client(int num1, int num2) {
+//         ID = num1;
+//         sumaBani = num2;
+//     }
+//     int getID() {
+//         return ID;
+//     }
+//     int setID(int num) {
+//         ID = num;
+//     }
+//     int getSum() {
+//         return sumaBani;
+//     }
+//     int setSum(int num) {
+//         sumaBani = num;
+//     }
+// };
+// class Banca {
+//     int nrClienti;
+//     Client clienti[];
+// public:
+//     void Read() {
+//         cin>>nrClienti;
+//         for (int i = 0; i < nrClienti; i++) {
+//             clienti[i].readClient();
+//         }
+//     }
+//     Banca() {
+//         nrClienti = 0;
+//         clienti[nrClienti] = {};
+//     }
+//     Banca(int num, Client c[]) {
+//         nrClienti = num;
+//         for (int i = 0; i < nrClienti; i++) {
+//             clienti[i] = c[i];
+//         }
+//     }
+//     int getNrClienti() {
+//         return nrClienti;
+//     }
+//     int setNrClienti(int num) {
+//         nrClienti = num;
+//     }
+//     void sumTotal() {
+//         long suma = 0;
+//         for (int i = 0; i < nrClienti; i++) {
+//             suma = suma + clienti[i].getSum();
+//         }
+//         cout<<"Suma totala este de "<<suma<<" RON.\n";
+//     }
+//     void minValue() {
+//         long count = 0;
+//         for (int i = 0; i < nrClienti; i++) {
+//             if(clienti[i].getSum() >= 1000) {
+//                 count++;
+//             }
+//         }
+//         cout<<count<<" clienti ai bancii au cel putin 1000 RON in cont\n";
+//     }
+//     void Percentage() {
+//         float p;
+//         long count = 0;
+//         for (int i = 0; i < nrClienti; i++) {
+//             if(clienti[i].getSum() > 100) {
+//                 count++;
+//             }
+//         }
+//         p = count*100/ nrClienti;
+//         cout<<p<<"% clienti au peste 100 RON in cont\n";
+//     }
+// };
+// int main() {
+//     Banca b;
+//     b.Read();
+//     b.sumTotal();
+//     b.minValue();
+//     b.Percentage();
 
-    return 0;
-}
+//     return 0;
+// }
+
+
+
+// #include<iostream>
+// #include<cstring>
+// using namespace std;
+
+// class IntervalOrar {
+//     int oraStart;
+//     int minStart;
+//     int oraFin;
+//     int minFin;
+// public:
+//     void IntervalRead();
+//     void IntervalOut();
+
+//     IntervalOrar() {
+//         oraStart = 0;
+//         oraFin = 0;
+//         minStart = 0;
+//         minFin = 0;
+//     }
+
+//     IntervalOrar(int num1, int num2, int num3, int num4) {
+//         oraStart = num1;
+//         minStart = num2;
+//         oraFin = num3;
+//         minFin = num4;
+//     }
+
+//     int getOraStart() {
+//         return oraStart;
+//     }
+
+//     int getOraFin() {
+//         return oraFin;
+//     }
+
+//     int getMinStart() {
+//         return minStart;
+//     }
+
+//     int getMinFin() {
+//         return minFin;
+//     }
+
+//     void setOraStart(int num1) {
+//         oraStart = num1;
+//     }
+
+//     void setMinStart(int num2) {
+//         minStart = num2;
+//     }
+
+//     void setOraFin(int num3) {
+//         oraFin = num3;
+//     }
+
+//     void setMinFin(int num4) {
+//         minFin = num4;
+//     }
+// };
+
+// class Camin {
+//     string name;
+//     int nrCamere;
+//     int k;
+//     IntervalOrar ore[];
+// public:
+//     Camin() {
+//         name = " ";
+//         nrCamere = 0;
+//         ore[k] = {};
+//     }
+//     Camin(string word, int num1, int num2, IntervalOrar o[]) {
+//         name = word;
+//         nrCamere = num1;
+//         k = num2;
+//         for (int i = 0; i < k; i++) {
+//             ore[i] = o[i];
+//         }
+//     }
+//     void caminRead();
+//     void caminOut();
+//     string getName() {
+//         return name;
+//     }
+
+//     int getNrCamere() {
+//         return nrCamere;
+//     }
+
+//     void setName(string word) {
+//         name = word;
+//     }
+
+//     void setNrCamere(int num1) {
+//         nrCamere = num1;
+//     }
+
+//     int getK() {
+//         return k;
+//     }
+
+//     void setK(int num1) {
+//         k = num1;
+//     }
+// };
+
+// void IntervalOrar::IntervalRead() {
+//     cin>>IntervalOrar::oraStart;
+//     cin>>IntervalOrar::minStart;
+//     cin>>IntervalOrar::oraFin;
+//     cin>>IntervalOrar::minFin;
+// }
+// void IntervalOrar::IntervalOut() {
+//     cout<<IntervalOrar::oraStart<<" ";
+//     cout<<IntervalOrar::minStart<< " ";
+//     cout<<IntervalOrar::oraFin<<" ";
+//     cout<<IntervalOrar::minFin<<" ";
+//     cout<<endl;
+// }
+
+// void Camin::caminRead() {
+//     getline(cin,Camin::name);
+//     cin>>Camin::k;
+//     for (int i = 0; i <Camin::k; i++) {
+//         Camin::ore[i].IntervalRead();
+//     }
+// }
+
+// void Camin::caminOut() {
+//     cout<<Camin::name<<" ";
+//     cout<<Camin::k<<endl;
+//     for (int i = 0; i <Camin::k; i++) {
+//         Camin::ore[i].IntervalOut();
+//     }
+// }
+
+
+// int main() {
+//     int nrCamine;
+//     cin>>nrCamine;
+//     cout<<nrCamine;
+//     Camin camine[nrCamine];
+//     for (int i = 0; i < nrCamine; i++) {
+//         camine[i].caminRead();
+//     }
+//     for (int i = 0; i < nrCamine; i++) {
+//         camine[i].caminOut();
+//     }
+//     return 0;
+// }
