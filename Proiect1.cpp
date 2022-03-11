@@ -40,7 +40,7 @@ class Masina {                  //clasa pentru masina de spalat
     int nrCapsule;
 public:
     Masina() {      //default constructor
-        free = 1;
+        free = true;
         durata_spalare.setSecunde(0);
         durata_spalare.setMinute(0);
         nrCapsule = 0;
@@ -119,27 +119,27 @@ public:
     void actualizareTimp(Durata _durata);
 };
 
-void Spalatorie::adaugaJob(int num, Durata _durata) {
+void Spalatorie::adaugaJob(int num, Durata _durata) {       //method for adding a job
     if (masini[num].getCapsule() == 0){
         cout<<"Masina "<<num<<" este neutilizabila!\n";
     }
     else{
         masini[num].setCapsule(masini[num].getCapsule()-1);
         masini[num].setDurata(_durata);
-        masini[num].setFree(0);
+        masini[num].setFree(false);
     }
 }
 
-void Spalatorie::actualizareTimp(Durata _durata) {
+void Spalatorie::actualizareTimp(Durata _durata) {      //method for checking status
     for (int i=0; i<Spalatorie::nrMasini; i++) {
         if (Spalatorie::masini[i].getDurata().getMinute() < _durata.getMinute()) {
             Spalatorie::masini[i].setDurata(Durata(0,0));
-            Spalatorie::masini[i].setFree(1);
+            Spalatorie::masini[i].setFree(true);
         }
         else {
             if (Spalatorie::masini[i].getDurata().getMinute() == _durata.getMinute() && Spalatorie::masini[i].getDurata().getSecunde() <= _durata.getSecunde()) {
                 Spalatorie::masini[i].setDurata(Durata(0,0));
-                Spalatorie::masini[i].setFree(1);
+                Spalatorie::masini[i].setFree(true);
             }
             else {
                 if (Spalatorie::masini[i].getDurata().getMinute() == _durata.getMinute() && Spalatorie::masini[i].getDurata().getSecunde() > _durata.getSecunde()) {
@@ -166,14 +166,15 @@ void Spalatorie::actualizareTimp(Durata _durata) {
 void listeazaMasiniLibere(Spalatorie _spalatorie) {
     cout<<"Masinile libere sunt: ";
     for (int i=0; i<_spalatorie.getNrMasini(); i++) {
-        if (_spalatorie.getMasini(i).getFree() == 1) {
+        cout<<_spalatorie.getMasini(i).getFree()<<" ";
+        if (_spalatorie.getMasini(i).getFree() == true) {
             cout<<i<<" ";
         }
     }
     cout<<endl;
 }
 
-void Spalatorie::listeazaMasini() {
+void Spalatorie::listeazaMasini() {     //method for listing 
     cout<<"Spalatoria in prezent: \n";
     for (int i=0; i<Spalatorie::nrMasini; i++) {
         if (Spalatorie::masini[i].getCapsule() == 0) {
