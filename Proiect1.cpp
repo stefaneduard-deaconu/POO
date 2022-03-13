@@ -83,16 +83,19 @@ void Masina::setCapsule(int num) {
 
 class Spalatorie {
     int nrMasini;
-    Masina masini[];
+    Masina masini[5]; // Masina masini[]   este ca si cum am scrie    Masina *masina;   Adica pointer. :( nu vrem asta.
 public:
     void citireSpalatorie();
-    
-    Spalatorie() {      //default construcor
+
+    Spalatorie() {      //default constructor
         nrMasini = 0;
         for (int i=0; i<nrMasini; i++) {
-            masini[i].setFree(1);
-            masini[i].setCapsule(0);
-            masini[i].setDurata(Durata(0,0));
+            // even better:
+            masini[i] = Masina(); // constructor default :D
+
+            // masini[i].setFree(1);
+            // masini[i].setCapsule(0);
+            // masini[i].setDurata(Durata(0,0));
         }
     }
 
@@ -108,7 +111,9 @@ public:
     }
 
     Masina getMasini(int index) {
-        return (masini[index]);
+        return masini[index]; // nu sunt necesare parantezele. O sa vezi ca punand pe github te indrum si pe codestyle :),
+        //                       Cu cat e codul mai simplu cu cat e viata mai usoara :D
+        
     }
 
     void setNrMasini(int num);
@@ -129,6 +134,9 @@ void Spalatorie::adaugaJob(int num, Durata _durata) {       //method for adding 
         masini[num].setFree(false);
     }
 }
+
+// TODO bonus daca in loc sa scrii cod atat de lung, implementezi o metoda in Durata denumita    bool maiMare(Durata durata2)
+//  Plus imbunatatire: folosit Spalatori::masini doar daca existau doua variabile denumite asa.
 
 void Spalatorie::actualizareTimp(Durata _durata) {      //method for checking status
     for (int i=0; i<Spalatorie::nrMasini; i++) {
@@ -166,22 +174,23 @@ void Spalatorie::actualizareTimp(Durata _durata) {      //method for checking st
 void listeazaMasiniLibere(Spalatorie _spalatorie) {
     cout<<"Masinile libere sunt: ";
     for (int i=0; i<_spalatorie.getNrMasini(); i++) {
-        cout<<_spalatorie.getMasini(i).getFree()<<" ";
-        if (_spalatorie.getMasini(i).getFree() == true) {
+//        cout<<_spalatorie.getMasini(i).getFree()<<" ";
+        if (_spalatorie.getMasini(i).getFree()) {
             cout<<i<<" ";
         }
     }
     cout<<endl;
 }
 
-void Spalatorie::listeazaMasini() {     //method for listing 
+void Spalatorie::listeazaMasini() {     //method for listing
     cout<<"Spalatoria in prezent: \n";
     for (int i=0; i<Spalatorie::nrMasini; i++) {
         if (Spalatorie::masini[i].getCapsule() == 0) {
             cout<<i<<". "<<"Masina nu mai are capsule\n";
         }
         else {
-            if (Spalatorie::masini[i].getFree() == 1) {
+            // pe scurt, ies cel mai bine in castig daca orice metoda bool/ atribut il folosesti in if  fara ==  sau !=
+            if (Spalatorie::masini[i].getFree()) {
                 cout<<i<<". "<<"Masina este libera\n";
             }
             else {
@@ -223,22 +232,26 @@ void Spalatorie::setMasini(Masina _masini[]) {
 int main() {
 
     Masina masini[5] = {
-        Masina(true, Durata(0,0), 3),
-        Masina(true, Durata(0,0), 2),
-        Masina(true, Durata(0,0), 5)
+            Masina(true, Durata(0,0), 3),
+            Masina(true, Durata(0,0), 2),
+            Masina(true, Durata(0,0), 5)
     };
 
     Spalatorie spalatorie {
-        3, masini
+            3, masini
     };
-
+//    cout << "1. *********" << '\n';
     spalatorie.listeazaMasini();
+//    cout << "2. *********" << '\n';
     listeazaMasiniLibere(spalatorie);
+//    cout << "************" << '\n';
+
     spalatorie.adaugaJob(1, Durata(1,20));
     spalatorie.listeazaMasini();
     spalatorie.actualizareTimp(Durata(1,19));
     spalatorie.listeazaMasini();
     spalatorie.actualizareTimp(Durata(1,0));
+    // TODO Cum facem aici ca sa afiseze 0:01 ?
     spalatorie.listeazaMasini();
     spalatorie.adaugaJob(1, Durata(0,35));
     spalatorie.actualizareTimp(Durata(3,0));
